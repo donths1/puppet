@@ -6,9 +6,9 @@ class sqlfire {
    exec { 'uz':
      command => '/usr/bin/unzip ${tc_zipfile} -d /opt/vmware',
      before => Exec['mkdir1'],
-     require => File['/opt/vmware/vFabric_SQLFire_11_b40332.zip'],
+     require => File[{"${sqlf_zipfile}"],
     }
-   file {"${vm_home}e/vFabric_SQLFire_11_b40332.zip":
+   file {"${sqlf_zipfile}":
       ensure => file,
       owner => root,
       mode => '0744', 
