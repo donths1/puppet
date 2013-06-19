@@ -24,7 +24,7 @@ class rabbit {
   #    ensure => file,
   #    owner => root,
   #    mode => '0744',
- #  }
+  #  }
    file {"${rb_tar}":
       ensure => file,
       owner => root,
