@@ -1,0 +1,48 @@
+class sqlfire {
+   exec { 'uz':
+     command => '/usr/bin/unzip /opt/vmware/vFabric_SQLFire_11_b40332.zip -d /opt/vmware',
+     before => Exec['mkdir1'],
+     require => File['/opt/vmware/vFabric_SQLFire_11_b40332.zip'],
+    }
+   file {'/opt/vmware/vFabric_SQLFire_11_b40332.zip':
+      ensure => file,
+      owner => root,
+      mode => '0744', 
+   }
+
+   exec {'mkdir1':
+       command => '/bin/mkdir /opt/vmware/vFabric_SQLFire_11_b40332/bin/locator',
+      before => Exec['mkdir2'],
+    }
+  exec {'mkdir2':
+       command => '/bin/mkdir /opt/vmware/vFabric_SQLFire_11_b40332/bin/server1',
+       before => Exec['mkdir3'],
+    }
+  exec {'mkdir3':
+       command => '/bin/mkdir /opt/vmware/vFabric_SQLFire_11_b40332/bin/server2',
+       before => Exec['mkdir4'],
+    }
+  exec {'mkdir4':
+       command => '/bin/mkdir /opt/vmware/vFabric_SQLFire_11_b40332/bin/server3',
+    }
+  service {'locstart':
+     ensure => running,
+     start => '/opt/vmware/vFabric_SQLFire_11_b40332/bin/sqlf locator start -dir=/opt/vmware/vFabric_SQLFire_11_b40332/bin/locator -peer-discovery-address=10.31.74.43 -peer-discovery-port=10101 -client-bind-address=10.31.74.43 -client-port=1527 &',
+    require => Exec['mkdir1'], 
+  }
+    service {'ser1start':
+     ensure => running,
+     start => '/opt/vmware/vFabric_SQLFire_11_b40332/bin/sqlf server start -dir=/opt/vmware/vFabric_SQLFire_11_b40332/bin/server1 -locators=10.31.74.43[10101] -client-bind-address=10.31.74.43 -client-port=1528 -rebalance &',
+    require => Exec['mkdir2'],
+  }
+    service {'ser2start':
+     ensure => running,
+     start => '/opt/vmware/vFabric_SQLFire_11_b40332/bin/sqlf server start -dir=/opt/vmware/vFabric_SQLFire_11_b40332/bin/server2 -locators=10.31.74.43[10101] -client-bind-address=10.31.74.43 -client-port=1529 -rebalance &',
+    require => Exec['mkdir3'],
+  }
+    service {'ser3start':
+     ensure => running,
+     start => '/opt/vmware/vFabric_SQLFire_11_b40332/bin/sqlf server start -dir=/opt/vmware/vFabric_SQLFire_11_b40332/bin/server3 -locators=10.31.74.43[10101] -client-bind-address=10.31.74.43 -client-port=1530 -rebalance &',
+    require => Exec['mkdir4'],
+  }
+ }
