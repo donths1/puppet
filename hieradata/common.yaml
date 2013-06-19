@@ -1,0 +1,12 @@
+---
+vm_home : '/opt/vmware'
+tc_zipfile : '/opt/vmware/vfabric-tc-server-standard-2.9.2.RELEASE.zip'
+tc_home : '/opt/vmware/vfabric-tc-server-standard-2.9.2.RELEASE'
+tc_bin : '/opt/vmware/vfabric-tc-server-standard-2.9.2.RELEASE/myinstance/bin'
+sqlscripts : '/opt/vmware/sqlfire/sqlfire-multi-site-master/scripts'
+sqlf_zipfile : '/opt/vmware/vFabric_SQLFire_11_b40332.zip'
+rb_home : '/opt/vmware/vfabric-rabbitmq-server-3.0.4'
+rb_sbin : '/opt/vmware/vfabric-rabbitmq-server-3.0.4/sbin'
+rb_tar : '/opt/vmware/vfabric-rabbitmq-server-3.0.4.tar.gz'
+otp_tar : '/opt/vmware/otp_src_R16B.tar.gz'
+otp_home : '/opt/vmware/otp_src_R16B'
