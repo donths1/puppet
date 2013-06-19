@@ -18,14 +18,14 @@ class rabbit {
     exec { 'rabbituz':
      command => "/bin/tar -xvf ${rb_tar} -C /opt/vmware/",
      before => Exec['enablemanagement'],
-     require => File["${vm_home}/vfabric-rabbitmq-server-3.0.4.tar.gz"],
+     require => File["${rb_tar}"],
     }
   # file {"${vm_home}/otp_src_R16B.tar.gz":
   #    ensure => file,
   #    owner => root,
   #    mode => '0744',
  #  }
-   file {"${vm_home}/vfabric-rabbitmq-server-3.0.4.tar.gz":
+   file {"${rb_tar}":
       ensure => file,
       owner => root,
       mode => '0744',
