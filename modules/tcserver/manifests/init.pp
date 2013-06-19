@@ -7,9 +7,9 @@ class tcserver {
    exec { 'uz':
      command => "/usr/bin/unzip ${tc_zipfile} -d /opt/vmware",
      before => Exec['tcinstance'],
-     require => File["${vm_home}/vfabric-tc-server-standard-2.9.2.RELEASE.zip"],
+     require => File["${tc_zipfile}"],
     }
-   file {"${vm_home}/vfabric-tc-server-standard-2.9.2.RELEASE.zip":
+   file {"${tc_zipfile}":
       ensure => file,
       owner => root,
       mode => '0744',
