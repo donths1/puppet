@@ -4,8 +4,9 @@ class tcserver {
    $tc_zipfile = hiera('tc_zipfile')
    $tc_home = hiera('tc_home')
    $tc_bin = hiera('tc_bin')
+   $tc_instance = hiera('tc_instance')
    exec { 'uz':
-     command => "/usr/bin/unzip ${tc_zipfile} -d /opt/vmware",
+     command => "/usr/bin/unzip ${tc_zipfile} -d ${vm_home}",
      before => Exec['tcinstance'],
      require => File["${tc_zipfile}"],
     }
@@ -15,7 +16,7 @@ class tcserver {
       mode => '0744',
    }
    exec { 'tcinstance':
-      command => "${tc_home}/tcruntime-instance.sh create -i ${tc_home} myinstance"
+      command => "${tc_home}/tcruntime-instance.sh create -i ${tc_home} ${tc_instance}"
       
     }
    service { 'tcruntime-ctl.sh':
